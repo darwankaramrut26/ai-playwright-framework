@@ -12,16 +12,21 @@ test('Valid Login Test', async ({ page }) => {
 });
 
 test('AI Generated Test Cases Demo', async () => {
-  const cases = await generateTestCases("Login functionality with valid and invalid inputs");
-  console.log("\nAI Generated Test Cases:\n", cases);
+  const cases = await generateTestCases('Login functionality with valid and invalid inputs');
+  console.log('\nAI Generated Test Cases:\n', cases);
+  expect(cases).toContain('Test');
 });
 
 test('Failure Analysis Demo', async ({ page }) => {
+  await page.goto('https://www.saucedemo.com/');
+
+  let analysis;
   try {
-    await page.goto('https://www.saucedemo.com/');
-    await page.click('#wrong-id'); // intentional failure
+    await page.click('#wrong-id', { timeout: 5000 }); // intentional failure with a shorter timeout
   } catch (error) {
-    const analysis = await analyzeFailure(error.message);
-    console.log("\nAI Failure Analysis:\n", analysis);
+    analysis = await analyzeFailure(error.message);
+    console.log('\nAI Failure Analysis:\n', analysis);
   }
+
+  expect(analysis).toBeTruthy();
 });
