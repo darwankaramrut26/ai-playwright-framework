@@ -10,4 +10,11 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure'
   },
+  
+});
+export default defineConfig({
+  reporter: [
+    ['list'], // console reporter
+    ['allure-playwright'] // Allure reporter
+  ],
 });
