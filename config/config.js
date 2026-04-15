@@ -5,16 +5,17 @@ module.exports = defineConfig({
   testDir: './tests',
   timeout: 30000,
   retries: 1,
+
   use: {
     headless: true,
     screenshot: 'only-on-failure',
-    video: 'retain-on-failure'
+    video: 'retain-on-failure',
+    trace: 'on-first-retry'
   },
-  
-});
-export default defineConfig({
+
   reporter: [
-    ['list'], // console reporter
-    ['allure-playwright'] // Allure reporter
+    ['spec'],               // ✅ Clean console output
+    ['html'],               // ✅ Playwright HTML report
+    ['allure-playwright']   // ✅ Allure report
   ],
 });
